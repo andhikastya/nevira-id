@@ -1,0 +1,233 @@
+@import "tailwindcss";
+@import "remixicon/fonts/remixicon.css";
+
+/* Kilau tokens — light mode (primary). Source: kilau-design/references/platform-mapping.md */
+:root {
+  --background: #ffffff;
+  --surface1: #f4f4f6;
+  --surface2: #e6e7ea;
+  --surface3: #cdcfd6;
+  --border: #e6e7ea;
+  --border-visible: #cdcfd6;
+  --text1: #32363e;
+  --text2: #4c515d;
+  --text3: #818898;
+  --text4: #b3b7c1;
+  --accent: #5b369e;
+  --accent-hover: #492b80;
+  --accent-dark: #2b194d;
+  --accent-subtle: #ebe5f6;
+  --reward: #e8b723;
+  --reward-deep: #8f6f0e;
+  /* Gold for large reward numbers on --reward-bg: passes WCAG AA large-text (3.66:1). */
+  --reward-strong: #a47a06;
+  --reward-bg: #fdf7e7;
+  --info: #34cfff;
+  --info-bg: #ebfaff;
+  --success: #277547;
+  --success-bg: #eafff0;
+  --error: #df1c41;
+  --error-bg: #fce8ec;
+
+  --elev-1: 0 1px 2px rgba(13, 13, 18, 0.06);
+  --elev-2: 0 4px 12px rgba(13, 13, 18, 0.08);
+  --elev-3: 0 12px 32px rgba(13, 13, 18, 0.12);
+  --ring-accent: 0 0 0 3px rgba(65, 38, 117, 0.2), 0 0 0 1px #8d6fd5;
+
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@theme inline {
+  --font-sans: "Red Hat Text", system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-surface-1: var(--surface1);
+  --color-surface-2: var(--surface2);
+  --color-surface-3: var(--surface3);
+  --color-border: var(--border);
+  --color-border-visible: var(--border-visible);
+  --color-text-1: var(--text1);
+  --color-text-2: var(--text2);
+  --color-text-3: var(--text3);
+  --color-text-4: var(--text4);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-dark: var(--accent-dark);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-reward: var(--reward);
+  --color-reward-deep: var(--reward-deep);
+  --color-reward-strong: var(--reward-strong);
+  --color-reward-bg: var(--reward-bg);
+  --color-info: var(--info);
+  --color-info-bg: var(--info-bg);
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-error: var(--error);
+  --color-error-bg: var(--error-bg);
+
+  --text-display: 40px;
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.02em;
+  --text-hero: 56px;
+  --text-hero--line-height: 1.02;
+  --text-hero--letter-spacing: -0.03em;
+  --text-heading: 32px;
+  --text-heading--line-height: 1.2;
+  --text-heading--letter-spacing: -0.02em;
+  --text-subheading: 24px;
+  --text-subheading--line-height: 1.2;
+  --text-subheading--letter-spacing: -0.01em;
+  --text-h5: 20px;
+  --text-h5--line-height: 1.2;
+  --text-h6: 18px;
+  --text-h6--line-height: 1.3;
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.55;
+  --text-body: 16px;
+  --text-body--line-height: 1.55;
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 1.5;
+  --text-caption: 12px;
+  --text-caption--line-height: 1.55;
+  --text-label: 14px;
+  --text-label--line-height: 1.2;
+
+  --radius-element: 8px;
+  --radius-control: 10px;
+  --radius-component: 12px;
+  --radius-container: 16px;
+
+  --shadow-1: var(--elev-1);
+  --shadow-2: var(--elev-2);
+  --shadow-3: var(--elev-3);
+
+  --ease-kilau: var(--ease);
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--background);
+  color: var(--text2);
+  font-family: "Red Hat Text", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text1);
+  font-weight: 700;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-accent);
+  border-radius: 10px;
+}
+
+::selection {
+  background: var(--accent-subtle);
+  color: var(--accent-dark);
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Kilau slider */
+.kilau-slider {
+  appearance: none;
+  height: 20px;
+  background: transparent;
+  cursor: pointer;
+}
+.kilau-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--accent) var(--pct), var(--surface3) var(--pct));
+}
+.kilau-slider::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--surface3);
+}
+.kilau-slider::-moz-range-progress {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+.kilau-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -8px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--border-visible);
+  box-shadow: var(--elev-1);
+  transition: transform 120ms var(--ease);
+}
+.kilau-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--border-visible);
+  box-shadow: var(--elev-1);
+}
+.kilau-slider:hover::-webkit-slider-thumb {
+  transform: scale(1.1);
+}
+.kilau-slider:active::-webkit-slider-thumb {
+  transform: scale(1.15);
+}
+.kilau-slider:focus-visible {
+  box-shadow: none;
+}
+.kilau-slider:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px var(--accent-subtle), var(--elev-1);
+}
+
+/* Shown only when the 3D scene is not running (no WebGL / reduced motion / before mount). */
+html[data-scene="on"] .no3d-only {
+  display: none;
+}
+
+/* Dusk stretch (Proof → CTA): light copy on the evening sky, only while the 3D scene runs. */
+html[data-scene="on"] .on-dusk h2 {
+  color: #ffffff;
+}
+html[data-scene="on"] .on-dusk .dusk-sub {
+  color: #dcd0f0;
+}
+html[data-scene="on"] .on-dusk [data-variant="primary"] {
+  /* Kilau dark-mode accent so the action stays visible on the purple evening sky. */
+  background: #916ed4;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25), var(--elev-2);
+}
+html[data-scene="on"] .on-dusk [data-variant="primary"]:hover {
+  background: #7550be;
+}
