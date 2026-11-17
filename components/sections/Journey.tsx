@@ -29,35 +29,38 @@ export function Journey() {
     <div id="cara-kerja" className="relative">
       <Section station="journey-intro" aria-labelledby="journey-title" className="flex min-h-[70svh] items-end pb-16">
         <Container>
-          <div className="relative inline-block">
-            {/* Soft frosted backdrop with feathered edges so the heading reads over the town. */}
-            <div
-              aria-hidden
-              className="absolute -inset-x-32 -inset-y-28 bg-white/45 backdrop-blur-lg [mask-image:radial-gradient(farthest-side,#000_0%,rgba(0,0,0,0.9)_28%,rgba(0,0,0,0.55)_55%,rgba(0,0,0,0.2)_78%,transparent_100%)]"
-            />
-            <div className="relative">
-              <SectionHeading id="journey-title" eyebrow={JOURNEY.eyebrow} title={JOURNEY.title} />
-            </div>
-          </div>
+          <Panel className="max-w-[480px] p-6 md:p-8">
+            <SectionHeading id="journey-title" eyebrow={JOURNEY.eyebrow} title={JOURNEY.title} body={JOURNEY.body} />
+          </Panel>
         </Container>
       </Section>
 
-      {/* Step rail — desktop */}
-      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[200px] lg:block" aria-hidden>
-        <ol className="sticky top-1/2 -translate-y-1/2 space-y-3 pr-8">
-          {JOURNEY.steps.map((s, i) => (
-            <li key={s.key} className="flex items-center justify-end gap-3">
-              <span
-                className={`text-body-sm transition-colors duration-[220ms] ${i === active ? "font-semibold text-text-1" : "text-text-4"}`}
-              >
-                {s.step}
-              </span>
-              <span
-                className={`h-0.5 rounded-full transition-all duration-[220ms] ${i === active ? "w-8 bg-accent" : "w-4 bg-surface-3"}`}
-              />
-            </li>
-          ))}
-        </ol>
+      {/* Step rail — desktop. A frosted card so the labels stay readable over the 3D scene; each step is a link. */}
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-[220px] lg:block">
+        <nav aria-label="Langkah order" className="pointer-events-auto sticky top-1/2 mr-6 -translate-y-1/2">
+          <ol className="rounded-[16px] border border-border bg-background/95 p-2 shadow-2">
+            {JOURNEY.steps.map((s, i) => (
+              <li key={s.key}>
+                <a
+                  href={`#langkah-${s.key}`}
+                  aria-current={i === active ? "step" : undefined}
+                  className={`flex items-center gap-3 rounded-[10px] px-3 py-2.5 text-body-sm transition-colors duration-[220ms] ${
+                    i === active ? "bg-accent-subtle font-semibold text-accent" : "text-text-2 hover:bg-surface-1 hover:text-text-1"
+                  }`}
+                >
+                  <span
+                    className={`flex size-6 shrink-0 items-center justify-center rounded-full text-caption font-semibold transition-colors duration-[220ms] ${
+                      i === active ? "bg-accent text-white" : "bg-surface-2 text-text-2"
+                    }`}
+                  >
+                    {i + 1}
+                  </span>
+                  {s.step}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
       </div>
 
       {JOURNEY.steps.map((s, i) => (
@@ -71,6 +74,8 @@ export function Journey() {
           aria-labelledby={`step-${s.key}`}
           className="flex min-h-[110svh] items-center"
         >
+          {/* Link target: sits where the section's centre is, so Lenis scrolls the step into its camera hold. */}
+          <span id={`langkah-${s.key}`} aria-hidden className="pointer-events-none absolute top-1/2 left-0 h-px w-px -translate-y-[50svh]" />
           <Container>
             <Panel className="max-w-[480px] p-6 md:p-8">
               <div className="flex items-center gap-3">

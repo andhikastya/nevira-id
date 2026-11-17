@@ -15,7 +15,7 @@ export function Connected() {
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {CONNECTED.modules.map((m) => (
             <li key={m.name}>
-              <Card className="h-full bg-background/90 p-5 backdrop-blur-md">
+              <Card className="h-full bg-background/95 p-5">
                 <span className="flex size-10 items-center justify-center rounded-[10px] bg-accent-subtle text-accent">
                   <i className={`${m.icon} text-[20px]`} aria-hidden />
                 </span>
@@ -25,6 +25,20 @@ export function Connected() {
             </li>
           ))}
         </ul>
+        <div className="mt-6 rounded-[16px] border border-border bg-background/95 p-5 md:p-6">
+          <h3 className="text-h6">{CONNECTED.moreTitle}</h3>
+          <ul className="mt-4 grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
+            {CONNECTED.more.map((m) => (
+              <li key={m.name} className="flex min-w-0 gap-3">
+                <i className={`${m.icon} mt-0.5 text-[18px] leading-none text-accent`} aria-hidden />
+                <div className="min-w-0">
+                  <p className="text-body-sm font-semibold text-text-1">{m.name}</p>
+                  <p className="text-body-sm text-text-2">{m.body}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </Container>
     </Section>
   );

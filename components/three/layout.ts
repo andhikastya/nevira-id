@@ -9,6 +9,7 @@ export const PLACES = {
   office: { pos: [6.4, 0, -4.8], rot: -0.35 }, // owner's office (Website Admin)
   home: { pos: [7.8, 0, 4.4], rot: -0.2 }, // customer's home: hand-over + payment (step 4)
   coins: { pos: [0.6, 0, 8], rot: 0 }, // Saldo Koin stack
+  selfService: { pos: [0.4, 0, -8.7], rot: 0 }, // self-service laundromat, north of the plaza, facing the hub
 } satisfies Record<string, Place>;
 
 export const ISLAND_RADIUS = 13;
@@ -24,3 +25,10 @@ export function front(place: Place, dist: number, height: number, side = 0): V3 
 }
 
 export const at = (place: Place, y: number): V3 => [place.pos[0], y, place.pos[2]];
+
+/** World position of a point given in a place's local frame (+z = facade, +x = its right). */
+export function localPoint(place: Place, [lx, ly, lz]: V3): V3 {
+  const s = Math.sin(place.rot);
+  const c = Math.cos(place.rot);
+  return [place.pos[0] + lx * c + lz * s, ly, place.pos[2] - lx * s + lz * c];
+}

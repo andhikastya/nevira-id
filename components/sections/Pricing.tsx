@@ -110,7 +110,7 @@ export function Pricing() {
 
           <ul className="mt-4 grid grid-cols-2 gap-2">
             {PRICING.rates.map((r) => (
-              <li key={r.label} className="rounded-[10px] border border-border bg-background/90 p-3 backdrop-blur-md">
+              <li key={r.label} className="rounded-[10px] border border-border bg-background/95 p-3">
                 <p className="flex items-center gap-1.5 text-caption text-text-3">
                   <i className={`${r.icon} text-[14px]`} aria-hidden />
                   {r.label}

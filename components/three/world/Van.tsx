@@ -85,6 +85,7 @@ function useBoxLabel() {
       new MeshBasicMaterial({
         toneMapped: false,
         transparent: true,
+        alphaTest: 0.35,
         map: logoBoardTexture("/brand/nevira-logo.png", { width: 360, height: 140, pad: 22, radius: 26 }),
       }),
     [],

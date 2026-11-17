@@ -10,11 +10,12 @@ import { Cat } from "./Cat";
 import { Courier, Person } from "./Person";
 import { Vespa } from "./Van";
 import { live } from "../runtime";
+import { tooltipsHidden } from "./kit";
 import { Box } from "./parts";
 
 const FOCUS = "journey-selesai";
 
-/** "Order selesai · lunas" card that pops when step 4 is in focus. */
+/** "Order selesai · bukti serah terima" card that pops when step 4 is in focus. */
 function Bubble() {
   const g = useRef<Group>(null);
   const s = useRef(0);
@@ -50,13 +51,14 @@ function Bubble() {
           c.fillText("Order #0412 · Selesai", 130, 70);
           c.fillStyle = "#4C515D";
           c.font = "500 26px 'Red Hat Text', sans-serif";
-          c.fillText("Lunas Rp71.000 · QRIS", 130, 112);
+          c.fillText("Bukti serah terima terunggah", 130, 112);
         }),
       }),
     [],
   );
-  useFrame((_, dt) => {
-    const goal = live.focus === FOCUS ? 1 : live.focus === "connected" || live.focus === "hero" ? 0.55 : 0;
+  useFrame(({ size }, dt) => {
+    const shown = live.focus === FOCUS ? 1 : live.focus === "connected" || live.focus === "hero" ? 0.55 : 0;
+    const goal = tooltipsHidden(size.width) ? 0 : shown;
     s.current = MathUtils.lerp(s.current, goal, 1 - Math.exp(-dt * 5));
     if (g.current) {
       g.current.scale.setScalar(Math.max(0.0001, s.current));
@@ -155,7 +157,7 @@ function Handoff() {
   );
 }
 
-/** Customer's cottage where the order is handed over and paid (step 4: Selesai & lunas). */
+/** Customer's cottage where the order is handed over with photo proof (step 4: Selesai). */
 export function Home() {
   const { pos, rot } = PLACES.home;
   const roof = useMemo(

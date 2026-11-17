@@ -50,7 +50,8 @@ const POSES = {
 export type PoseName = keyof typeof POSES;
 
 /** Storybook person with arms, hands, legs, shoes, eyes and hair. */
-export function Person({ shirt, hair, pose = "stand" }: { shirt: Material; hair: Material; pose?: PoseName }) {
+/** `hat`: the head wears a cap (Courier), so only a neat band of hair shows below it at the back and sides. */
+export function Person({ shirt, hair, pose = "stand", hat = false }: { shirt: Material; hair: Material; pose?: PoseName; hat?: boolean }) {
   const p: Pose = POSES[pose];
   const mirror = (v: P3, s: number): P3 => [v[0] * s, v[1], v[2]];
   const elbowOf = (s: number): P3 => (s < 0 && p.elbowL ? p.elbowL : mirror(p.elbow, s));
@@ -84,9 +85,28 @@ export function Person({ shirt, hair, pose = "stand" }: { shirt: Material; hair:
         <mesh material={M.skin} castShadow>
           <sphereGeometry args={[0.13, 18, 14]} />
         </mesh>
-        <mesh position={[0, 0.035, -0.015]} scale={[1.06, 0.8, 1.06]} material={hair}>
-          <sphereGeometry args={[0.13, 18, 14, 0, Math.PI * 2, 0, Math.PI / 2]} />
-        </mesh>
+        {hat ? (
+          // under a cap: short hair hugging the head below the brim (stays inside the cap's radius, so nothing pokes through)
+          <mesh position={[0, 0, -0.004]} material={hair}>
+            <sphereGeometry args={[0.1335, 24, 8, Math.PI * 0.85, Math.PI * 1.3, Math.PI * 0.44, Math.PI * 0.24]} />
+          </mesh>
+        ) : (
+          <>
+            <mesh position={[0, 0.035, -0.015]} scale={[1.06, 0.8, 1.06]} material={hair}>
+              <sphereGeometry args={[0.13, 18, 14, 0, Math.PI * 2, 0, Math.PI / 2]} />
+            </mesh>
+            {/* hair down the back of the head, so the head doesn't read as a bowl from behind */}
+            <mesh position={[0, 0.0, -0.012]} scale={[1.05, 1, 1.05]} material={hair}>
+              <sphereGeometry args={[0.13, 18, 10, Math.PI, Math.PI, Math.PI * 0.42, Math.PI * 0.36]} />
+            </mesh>
+          </>
+        )}
+        {/* ears */}
+        {[-1, 1].map((s) => (
+          <mesh key={s} position={[s * 0.128, -0.012, 0]} scale={[0.45, 0.9, 0.65]} material={M.skin}>
+            <sphereGeometry args={[0.035, 10, 8]} />
+          </mesh>
+        ))}
         {[-0.045, 0.045].map((x) => (
           <mesh key={x} position={[x, -0.005, 0.122]} material={M.ink}>
             <sphereGeometry args={[0.016, 8, 6]} />
@@ -102,10 +122,14 @@ export function Courier({ pose = "stand" }: { pose?: PoseName }) {
   const headZ = (POSES[pose] as Pose).shoulder[2];
   return (
     <group>
-      <Person shirt={M.purpleSoft} hair={M.ink} pose={pose} />
+      <Person shirt={M.purpleSoft} hair={M.ink} pose={pose} hat />
       <group position={[0, 0.83, headZ]}>
-        <mesh material={M.purpleSoft}>
-          <sphereGeometry args={[0.135, 18, 12, 0, Math.PI * 2, 0, Math.PI / 2]} />
+        <mesh material={M.purpleSoft} castShadow>
+          <sphereGeometry args={[0.14, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2]} />
+        </mesh>
+        {/* button on top */}
+        <mesh position={[0, 0.138, 0]} material={M.purpleSoft}>
+          <sphereGeometry args={[0.018, 10, 8]} />
         </mesh>
         <mesh position={[0, 0.0, 0.14]} rotation={[0.15, 0, 0]} material={M.purpleSoft}>
           <boxGeometry args={[0.2, 0.02, 0.13]} />

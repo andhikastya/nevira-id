@@ -113,7 +113,7 @@ export function Island() {
   const surfaces = useMemo(() => roadMaterials(), []);
   const roads = useMemo(() => {
     const ring = ribbon(ringCurve, RING_WIDTH, 160, true, 0.02, repeatsFor(ringCurve.getLength(), true));
-    const spokes = (["shop", "workshop", "office", "home", "coins"] as const).map((k) => {
+    const spokes = (["shop", "workshop", "office", "home", "coins", "selfService"] as const).map((k) => {
       // The home has a front path, so its road stops at the curb where the van parks.
       const c = spoke(k, k === "coins" ? 0 : k === "home" ? 3.6 : 1.9);
       // Each tile starts with a quarter-period gap, so the first dash sits clear of the junction.

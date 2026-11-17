@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
 
 type Variant = "primary" | "secondary" | "tertiary";
@@ -46,6 +47,17 @@ export function ButtonLink({
   ...rest
 }: Common & AnchorHTMLAttributes<HTMLAnchorElement>) {
   const external = rest.href?.startsWith("http");
+  // Internal routes go through next/link so the persistent 3D scene isn't reloaded.
+  if (rest.href?.startsWith("/")) {
+    const { href, ...anchor } = rest;
+    return (
+      <Link {...anchor} href={href} data-variant={variant ?? "primary"} className={buttonClass(variant, size, className)}>
+        <Inner icon={icon} trailingIcon={trailingIcon}>
+          {children}
+        </Inner>
+      </Link>
+    );
+  }
   return (
     <a
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}

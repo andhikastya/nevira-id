@@ -1,7 +1,8 @@
 "use client";
 
 import Lenis from "lenis";
-import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 import { useScene } from "@/lib/sceneStore";
 
 type Hold = { start: number; end: number };
@@ -14,18 +15,30 @@ const HOLD_TO = 0.7;
  * Smooth scrolling (Lenis) + scroll → station progress mapping.
  * Each [data-station] section gets a "hold" scroll range centered in the viewport;
  * between holds the progress interpolates linearly to the next station.
+ * Any [data-opaque] element that fully covers the viewport pauses 3D rendering.
+ *
+ * Mounted once in the root layout, so it survives client navigation; it re-measures
+ * whenever the route changes.
  */
 export function ScrollDriver() {
+  const pathname = usePathname();
+  const api = useRef<{ measure: () => void; lenis: Lenis | null } | null>(null);
+
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const lenis = reduce ? null : new Lenis({ autoRaf: true, anchors: { offset: 0 }, lerp: 0.09 });
 
     let holds: Hold[] = [];
+    let opaque: HTMLElement[] = [];
     const { setStations, setStationProgress, setPaused } = useScene.getState();
-    const faq = document.getElementById("faq");
+
+    // Next keeps recently visited routes mounted but hidden (display: none) — skip those.
+    const visible = (sel: string) =>
+      Array.from(document.querySelectorAll<HTMLElement>(sel)).filter((el) => el.getClientRects().length > 0);
 
     const measure = () => {
-      const els = Array.from(document.querySelectorAll<HTMLElement>("[data-station]"));
+      const els = visible("[data-station]");
+      opaque = visible("[data-opaque]");
       const vh = window.innerHeight;
       const maxY = document.documentElement.scrollHeight - vh;
       holds = els.map((el) => {
@@ -41,10 +54,13 @@ export function ScrollDriver() {
 
     const update = () => {
       const y = window.scrollY;
-      if (faq) {
-        const r = faq.getBoundingClientRect();
-        setPaused(r.top <= 0 && r.bottom >= window.innerHeight);
-      }
+      const vh = window.innerHeight;
+      setPaused(
+        opaque.some((el) => {
+          const r = el.getBoundingClientRect();
+          return r.top <= 0 && r.bottom >= vh;
+        }),
+      );
       if (!holds.length) return;
       let p = 0;
       for (let i = 0; i < holds.length; i++) {
@@ -62,17 +78,29 @@ export function ScrollDriver() {
       setStationProgress(holds.length - 1);
     };
 
+    api.current = { measure, lenis };
     measure();
     const ro = new ResizeObserver(measure);
     ro.observe(document.body);
     window.addEventListener("scroll", update, { passive: true });
 
     return () => {
+      api.current = null;
       ro.disconnect();
       window.removeEventListener("scroll", update);
       lenis?.destroy();
     };
   }, []);
+
+  // New route: Lenis must forget the old page's scroll position, then stations are re-read.
+  useEffect(() => {
+    const a = api.current;
+    if (!a) return;
+    if (!window.location.hash) a.lenis?.scrollTo(0, { immediate: true, force: true });
+    a.lenis?.resize();
+    const id = requestAnimationFrame(a.measure);
+    return () => cancelAnimationFrame(id);
+  }, [pathname]);
 
   return null;
 }

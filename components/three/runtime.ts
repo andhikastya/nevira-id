@@ -14,6 +14,7 @@ export const live: SceneParams & { time: number; focus: string } = {
   hub: 1,
   dusk: 0,
   sign: 0,
+  morning: 0,
   time: 0,
   /** Name of the nearest station (for station-specific flourishes). */
   focus: "hero",

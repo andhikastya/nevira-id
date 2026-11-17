@@ -10,6 +10,9 @@ import { live } from "../runtime";
 import { ScreenPanel } from "../ScreenPanel";
 import { Box, Cyl, Room } from "./parts";
 import { Person } from "./Person";
+import { featureStation } from "../stations";
+import { InfoBubble, inFocus, tooltipsHidden } from "./kit";
+import { OfficeScreens } from "./OfficeScreens";
 
 const W = 3.6;
 const D = 3;
@@ -60,8 +63,8 @@ function OwnerTooltip() {
       }),
     [],
   );
-  useFrame((_, dt) => {
-    const goal = live.focus === "journey-laporan" ? 1 : 0;
+  useFrame(({ size }, dt) => {
+    const goal = live.focus === "journey-laporan" && !tooltipsHidden(size.width) ? 1 : 0;
     k.current = MathUtils.lerp(k.current, goal, 1 - Math.exp(-dt * 5));
     if (g.current) {
       g.current.scale.setScalar(Math.max(0.0001, k.current));
@@ -113,6 +116,15 @@ function Owner() {
         </mesh>
       </group>
       <OwnerTooltip />
+      {/* /fitur/aplikasi-owner station 2: an approval request lands on the phone */}
+      <InfoBubble
+        stations={featureStation("aplikasi-owner", 2)}
+        at={[0, 1.95, 0]}
+        size={1.5}
+        icon="!"
+        title="Refund Rp35.000 menunggu"
+        sub="Setujui dari HP dengan PIN owner"
+      />
     </group>
   );
 }
@@ -125,7 +137,8 @@ export function Office() {
   const grow = useRef(0.25);
 
   useFrame((_, dt) => {
-    const goal = live.focus === "journey-laporan" ? 1 : 0.25;
+    // "office-bars" lets feature pages grow the chart without popping the owner tooltip.
+    const goal = inFocus(["journey-laporan", "office-bars"]) ? 1 : 0.25;
     grow.current = MathUtils.lerp(grow.current, goal, 1 - Math.exp(-dt * 2.5));
     bars.current.forEach((b, i) => {
       if (!b) return;
@@ -153,6 +166,7 @@ export function Office() {
         <group position={[-0.3, 1.58, -0.78]} rotation={[0, 0.15, 0]}>
           <Box size={[1.36, 0.86, 0.05]} at={[0, 0, -0.03]} material={M.ink} />
           <ScreenPanel kind="admin" width={1.3} height={0.8} />
+          <OfficeScreens width={1.3} height={0.8} />
         </group>
         {/* chair */}
         <Box size={[0.5, 0.08, 0.5]} at={[-0.3, 0.55, 0.1]} material={M.purpleMid} />

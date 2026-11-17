@@ -7,6 +7,10 @@ import { PLACES } from "../layout";
 import { M, canvasTexture, glowTexture, logoBoardTexture, roundRect } from "../materials";
 import { live } from "../runtime";
 import { ScreenPanel } from "../ScreenPanel";
+import { featureStation } from "../stations";
+import { KasirScene } from "./KasirScene";
+import { AbsensiScene, AntarShopScene, AttendanceDevice } from "./ShopExtras";
+import { usePage } from "./kit";
 import { Box, Cyl, Room } from "./parts";
 
 const W = 4.2;
@@ -21,6 +25,9 @@ function Sign() {
     () =>
       new MeshBasicMaterial({
         toneMapped: false,
+        // the board has rounded, transparent corners: without this they render solid black
+        transparent: true,
+        alphaTest: 0.35,
         map: logoBoardTexture("/brand/nevira-logo.png", { width: 768, height: 256, pad: 44, border: "#5B369E" }),
       }),
     [],
@@ -94,6 +101,10 @@ function Shelves() {
 
 export function Shop() {
   const { pos, rot } = PLACES.shop;
+  // The kasir set piece only exists while /fitur/kasir-pos is the active page.
+  const kasirPage = usePage(featureStation("kasir-pos", 0));
+  const absensiPage = usePage(featureStation("karyawan-absensi", 0));
+  const antarPage = usePage(featureStation("antar-jemput", 0));
   return (
     <group position={pos} rotation={[0, rot, 0]}>
       <Room w={W} d={D} h={H} wall={M.wall} floor={M.floor}>
@@ -122,8 +133,8 @@ export function Shop() {
         <Cyl r={0.24} rTop={0.28} h={0.26} at={[-0.25, 1.33, 0.55]} material={M.lilac} seg={8} />
         {/* receipt printer */}
         <Box size={[0.22, 0.14, 0.2]} at={[1.45, 1.22, 0.55]} material={M.ink} />
-        {/* laundry bags */}
-        {[
+        {/* laundry bags (cleared on the kasir page, where the customer stands there) */}
+        {!kasirPage && [
           [-1.4, 0.4, 0.9, M.lavender],
           [-1.0, 0.36, 1.2, M.wallSoft],
           [-1.6, 0.32, 1.35, M.lilac],
@@ -132,6 +143,10 @@ export function Shop() {
             <icosahedronGeometry args={[s as number, 0]} />
           </mesh>
         ))}
+        <AttendanceDevice />
+        {kasirPage && <KasirScene />}
+        {absensiPage && <AbsensiScene />}
+        {antarPage && <AntarShopScene />}
       </Room>
     </group>
   );

@@ -6,6 +6,9 @@ import type { Group } from "three";
 import { PLACES } from "../layout";
 import { M } from "../materials";
 import { ScreenPanel } from "../ScreenPanel";
+import { featureStation } from "../stations";
+import { usePage } from "./kit";
+import { ProduksiScene } from "./ProduksiScene";
 import { Box, Cyl, Room } from "./parts";
 
 const W = 4.4;
@@ -43,6 +46,7 @@ function Machine({ x, speed }: { x: number; speed: number }) {
 
 export function Workshop() {
   const { pos, rot } = PLACES.workshop;
+  const page = usePage(featureStation("produksi", 0));
   return (
     <group position={pos} rotation={[0, rot, 0]}>
       <Room w={W} d={D} h={H} wall={M.wallSoft} floor={M.floor}>
@@ -66,11 +70,16 @@ export function Workshop() {
           <Box size={[1.06, 0.7, 0.04]} at={[0, 0, -0.025]} material={M.ink} />
           <ScreenPanel kind="produksi" width={1} height={0.64} />
         </group>
-        {/* work-order tags on a line */}
-        <Box size={[2.6, 0.015, 0.015]} at={[-0.4, 1.95, -D / 2 + 0.3]} material={M.slate} />
-        {[-1.4, -0.9, -0.3, 0.3].map((x, i) => (
-          <Box key={x} size={[0.2, 0.26, 0.01]} at={[x, 1.8, -D / 2 + 0.31]} material={i === 1 ? M.purpleLight : M.wall} />
-        ))}
+        {/* work-order tags on a line (the produksi page swaps these for a full work board) */}
+        {!page && (
+          <>
+            <Box size={[2.6, 0.015, 0.015]} at={[-0.4, 1.95, -D / 2 + 0.3]} material={M.slate} />
+            {[-1.4, -0.9, -0.3, 0.3].map((x, i) => (
+              <Box key={x} size={[0.2, 0.26, 0.01]} at={[x, 1.8, -D / 2 + 0.31]} material={i === 1 ? M.purpleLight : M.wall} />
+            ))}
+          </>
+        )}
+        {page && <ProduksiScene />}
       </Room>
     </group>
   );

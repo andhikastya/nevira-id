@@ -11,9 +11,9 @@ const TOP = new Vector3(0, 3.6, 0);
 const lineMat = mat("#916ED4", { emissive: "#916ED4", emissiveIntensity: 0.6, transparent: true, opacity: 0.9 });
 const pulseMat = mat("#FFFFFF", { emissive: "#C3AEE7", emissiveIntensity: 1 });
 
-const TARGETS = (["shop", "workshop", "office", "home"] as const).map((k) => {
+const TARGETS = (["shop", "workshop", "office", "home", "selfService"] as const).map((k) => {
   const p = PLACES[k].pos;
-  return new Vector3(p[0], k === "office" ? 4.4 : 3, p[2]);
+  return new Vector3(p[0], k === "office" ? 4.4 : k === "selfService" ? 3.2 : 3, p[2]);
 });
 
 // Tower body: hexagonal prism, radius 0.85 at the base (y=0.4) tapering to 0.55 at the top (y=3.4).

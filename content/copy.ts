@@ -12,20 +12,22 @@ export const LINKS = {
   whatsapp: "https://wa.me/6280000000000?text=Halo%20Nevira%2C%20saya%20ingin%20tahu%20lebih%20lanjut",
 } as const;
 
-export const NAV = [
-  { label: "Beranda", href: "#top" },
-  { label: "Cara Kerja", href: "#cara-kerja" },
-  { label: "Harga", href: "#harga" },
-  { label: "FAQ", href: "#faq" },
-] as const;
+/** Top navigation. The item with `menu: "fitur"` opens the feature dropdown (content/features.ts). */
+export const NAV: readonly { label: string; href: string; menu?: "fitur" }[] = [
+  { label: "Beranda", href: "/" },
+  { label: "Cara Kerja", href: "/#cara-kerja" },
+  { label: "Fitur", href: "/fitur", menu: "fitur" },
+  { label: "Harga", href: "/harga" },
+  { label: "FAQ", href: "/bantuan" },
+];
 
 export const HERO = {
   eyebrow: "Sistem operasional laundry",
   title: "Laundry Anda rapi, dari terima sampai antar.",
-  body: "Nevira menyatukan kasir, ruang cuci, kurir, dan laporan keuangan dalam satu sistem. Tidak ada lagi nota hilang, order nyasar, atau laba yang cuma ditebak.",
+  body: "Kasir, ruang cuci, kurir, owner, dan laporan keuangan dalam satu sistem. Tidak ada lagi nota hilang, order nyasar, atau laba yang cuma ditebak.",
   primary: "Coba Gratis",
   secondary: "Lihat cara kerjanya",
-  trust: ["Bayar per transaksi, mulai Rp100", "Kasir, produksi, kurir, admin", "Notifikasi WhatsApp otomatis"],
+  trust: ["Bayar per transaksi", "HP & tablet", "Kirim struk via WhatsApp"],
 } as const;
 
 export const PROBLEM = {
@@ -71,6 +73,7 @@ export type JourneyStep = {
 export const JOURNEY = {
   eyebrow: "Cara kerja",
   title: "Ikuti perjalanan satu order.",
+  body: "Lima langkah dari kasir sampai laporan, semuanya tercatat sekali.",
   steps: [
     {
       key: "terima",
@@ -78,8 +81,8 @@ export const JOURNEY = {
       module: "POS Kasir",
       icon: "ri-store-2-line",
       title: "Order masuk dalam hitungan detik",
-      body: "Pilih layanan, timbang, cetak nota. Pembayaran tunai maupun digital langsung tercatat.",
-      points: ["Transaksi penjualan", "Pembayaran digital", "Laporan harian kasir"],
+      body: "Pilih layanan, harga bertingkat, express. Bayar tunai, QRIS, EDC, transfer, atau nanti.",
+      points: ["Katalog & harga bertingkat", "Tunai · QRIS · EDC · transfer", "Cetak & bagikan struk"],
       screen: "/screens/pos-kasir.png",
     },
     {
@@ -88,8 +91,8 @@ export const JOURNEY = {
       module: "POS Produksi",
       icon: "ri-t-shirt-air-line",
       title: "Ruang cuci tahu apa yang dikerjakan",
-      body: "Work order muncul otomatis, dan stok bahan baku berkurang setiap kali order diproses.",
-      points: ["Work order", "Stok bahan baku", "Sinkron inventaris"],
+      body: "Staf mengambil order dari antrean dan mencatat tiap tahap sampai packing.",
+      points: ["Daftar kerja produksi", "Tahapan per staf", "Packing, rak & catatan"],
       screen: "/screens/pos-produksi.png",
     },
     {
@@ -97,28 +100,28 @@ export const JOURNEY = {
       step: "Antar",
       module: "POS Kurir",
       icon: "ri-e-bike-2-line",
-      title: "Kurir punya rute, bukan tebakan",
-      body: "Jadwal jemput-antar dan status pengiriman terlihat oleh kasir dan pemilik secara real-time.",
-      points: ["Rute jemput-antar", "Status pengiriman", "Jadwal kurir"],
+      title: "Kurir punya jadwal, bukan tebakan",
+      body: "Jadwal jemput-antar dan status pengiriman terlihat oleh kasir dan owner.",
+      points: ["Jadwal jemput-antar", "Penugasan kurir massal", "Terjadwal · berjalan · riwayat"],
       screen: "/screens/pos-kurir.png",
     },
     {
       key: "selesai",
       step: "Selesai",
-      module: "Serah terima & pembayaran",
+      module: "Serah terima",
       icon: "ri-checkbox-circle-line",
-      title: "Cucian sampai, pembayaran langsung tercatat",
-      body: "Kurir menyerahkan cucian dan menerima pembayaran tunai atau digital di tempat. Status order otomatis jadi selesai, tanpa nota yang perlu dicocokkan lagi.",
-      points: ["Bukti serah terima", "Bayar tunai atau digital", "Status otomatis selesai"],
+      title: "Cucian sampai, buktinya tersimpan",
+      body: "Kurir mengunggah foto bukti serah terima; status order ikut berubah, tanpa nota yang perlu dicocokkan lagi.",
+      points: ["Foto bukti serah terima", "Status otomatis selesai", "Pelunasan tercatat di kasir"],
     },
     {
       key: "laporan",
       step: "Laporan",
-      module: "Website Admin",
+      module: "Back office + Aplikasi Owner",
       icon: "ri-line-chart-line",
       title: "Laba-rugi terbaca, bukan ditebak",
-      body: "Penjualan, pengeluaran, dan laba-rugi tersaji di satu dashboard yang bisa Anda pantau dari HP, kapan saja dan di mana saja.",
-      points: ["Laporan laba-rugi", "Pantau dari HP", "Master data & promo"],
+      body: "Laporan lengkap di back office web; omzet, piutang, dan persetujuan dari aplikasi owner.",
+      points: ["Laba-rugi & arus kas", "Omzet & piutang dari HP", "Setujui void & refund"],
       screen: "/screens/admin.png",
     },
   ] satisfies JourneyStep[],
@@ -126,15 +129,57 @@ export const JOURNEY = {
 
 export const CONNECTED = {
   eyebrow: "Semua terhubung",
-  title: "Empat modul, satu data.",
-  body: "Setiap modul membaca data yang sama. Stok, order, dan uang selalu sinkron, di kasir maupun di laporan.",
+  title: "Satu data untuk semua peran.",
+  body: "Order, produksi, pengantaran, dan uang selalu sinkron di HP, tablet, dan back office.",
   modules: [
-    { icon: "ri-dashboard-line", name: "Website Admin", body: "Laporan laba-rugi, master data, dan promo." },
-    { icon: "ri-store-2-line", name: "POS Kasir", body: "Transaksi, stok real-time, dan laporan harian." },
-    { icon: "ri-t-shirt-air-line", name: "POS Produksi", body: "Work order, stok bahan baku, sinkron inventaris." },
-    { icon: "ri-e-bike-2-line", name: "POS Kurir", body: "Status pengiriman, rute, dan notifikasi pelanggan." },
+    { icon: "ri-dashboard-line", name: "Website Admin", body: "Laporan, akuntansi, master data, dan promo." },
+    { icon: "ri-store-2-line", name: "POS Kasir", body: "Transaksi, deposit pelanggan, dan laporan harian." },
+    { icon: "ri-t-shirt-air-line", name: "POS Produksi", body: "Antrean per tahap dan status order." },
+    { icon: "ri-e-bike-2-line", name: "POS Kurir", body: "Jadwal jemput-antar dan foto bukti serah terima." },
+  ],
+  moreTitle: "Lebih dari sekadar kasir",
+  more: [
+    { icon: "ri-smartphone-line", name: "Aplikasi owner", body: "Omzet, piutang, persetujuan void & refund, top-up Saldo Koin." },
+    { icon: "ri-shirt-line", name: "Self-service", body: "Monitor mesin, mulai & hentikan sesi, mode maintenance." },
+    { icon: "ri-fingerprint-line", name: "Absensi karyawan", body: "Check-in dengan lokasi GPS, QR, RFID, atau NIP." },
+    { icon: "ri-wallet-3-line", name: "Petty cash", body: "Catat kas kecil dengan PIN dan ringkasan harian." },
+    { icon: "ri-safe-2-line", name: "Deposit pelanggan", body: "Paket deposit, saldo, riwayat, dan refund." },
+    { icon: "ri-price-tag-3-line", name: "Promo & harga", body: "Promo dan harga bertingkat per layanan." },
+    { icon: "ri-book-2-line", name: "Akuntansi", body: "Arus kas, laba-rugi, neraca, buku besar." },
+    { icon: "ri-arrow-left-right-line", name: "Transfer order", body: "Pindahkan order antar outlet." },
+    { icon: "ri-tablet-line", name: "HP & tablet", body: "Satu aplikasi, printer thermal Bluetooth." },
   ],
 } as const;
+
+/** Home: "Untuk setiap peran" — the roles beyond the cashier (station: peran). */
+export const PERAN = {
+  eyebrow: "Untuk setiap peran",
+  title: "Bukan cuma kasir.",
+  body: "Nevira juga melayani pemilik, karyawan, dan laundry self service.",
+  roles: [
+    { icon: "ri-smartphone-line", name: "Pemilik", body: "Omzet, piutang, dan persetujuan dari aplikasi owner.", href: "/fitur/aplikasi-owner" },
+    { icon: "ri-fingerprint-line", name: "Karyawan", body: "Absensi GPS, QR/RFID, level akses, dan laporan kehadiran.", href: "/fitur/karyawan-absensi" },
+    { icon: "ri-shirt-line", name: "Laundry self service", body: "Monitor mesin, sesi pelanggan, dan penarikan dana.", href: "/fitur/self-service" },
+  ],
+} as const;
+
+/** Home: unsolved problems from other laundry apps (station: usp). Pain points only; Nevira's answer is the CS line. */
+export const USP = {
+  eyebrow: "Kenapa Nevira",
+  title: "Kendala yang sering tidak terselesaikan oleh aplikasi laundry.",
+  body: "Lima masalah yang paling sering disampaikan pemilik laundry kepada kami.",
+  items: [
+    { key: "bot", title: "Dukungan hanya lewat bot", body: "Keluhan dijawab menu otomatis, tanpa tim yang menindaklanjuti." },
+    { key: "apps", title: "Aplikasi terpisah-pisah", body: "Kasir, kurir, dan keuangan dikelola di aplikasi yang berbeda." },
+    { key: "nota", title: "Status order sulit dilacak", body: "Posisi cucian harus ditanyakan satu per satu secara manual." },
+    { key: "feedback", title: "Masukan tidak ditanggapi", body: "Saran pengguna untuk aplikasi tidak pernah mendapat jawaban." },
+    { key: "data", title: "Laporan disusun manual", body: "Data harus direkap berjam-jam sebelum bisa dianalisis." },
+  ],
+  badge: "CS Nevira 24/7",
+  promise: "Tim kami siap membantu kapan pun, dan setiap masukan Anda menjadi dasar pengembangan Nevira.",
+} as const;
+
+export type UspKey = (typeof USP.items)[number]["key"];
 
 export const PRICING = {
   eyebrow: "Harga",
@@ -150,7 +195,7 @@ export const PRICING = {
     title: "Hitung estimasi biaya bulanan",
     txLabel: "Transaksi per bulan",
     printLabel: "Cetak nota setiap transaksi",
-    waLabel: "Kirim 2 notifikasi WhatsApp per transaksi",
+    waLabel: "Kirim 2 pesan WhatsApp per transaksi",
     exportLabel: "Ekspor laporan Excel per bulan",
     resultLabel: "Estimasi Saldo Koin per bulan",
     perTxLabel: "per transaksi",
@@ -173,7 +218,7 @@ export const PROOF = {
       business: "Laundry Contoh, Malang",
     },
     {
-      quote: "Pelanggan jarang tanya lagi 'sudah selesai belum?', karena notifikasinya otomatis.",
+      quote: "Saya bisa setujui refund dari HP tanpa harus datang ke outlet.",
       name: "Nama Pemilik",
       business: "Laundry Contoh, Surabaya",
     },
@@ -194,7 +239,7 @@ export const FAQ: { eyebrow: string; title: string; body: string; items: FaqItem
   items: [
     {
       q: "Apa itu Nevira?",
-      a: "Nevira adalah sistem operasional untuk bisnis laundry. Kasir, produksi, kurir, notifikasi pelanggan, dan laporan keuangan ada dalam satu aplikasi yang saling terhubung.",
+      a: "Nevira adalah sistem operasional untuk bisnis laundry. Kasir, produksi, kurir, aplikasi owner, dan laporan keuangan ada dalam satu sistem yang saling terhubung.",
     },
     {
       q: "Bagaimana sistem Saldo Koin bekerja?",
@@ -209,8 +254,16 @@ export const FAQ: { eyebrow: string; title: string; body: string; items: FaqItem
       a: "Ya. Layanan dan harga bisa diatur sesuai kebutuhan bisnis Anda, dari laundry kiloan sampai layanan premium.",
     },
     {
-      q: "Bagaimana pelanggan saya melacak status cucian?",
-      a: "Pelanggan menerima notifikasi WhatsApp otomatis di setiap tahap, mulai dari cucian diterima, selesai diproses, hingga diantar.",
+      q: "Bagaimana saya memantau status cucian?",
+      a: "Tahap order, produksi, dan pengantaran terlihat di aplikasi kasir dan aplikasi owner. Struk juga bisa dibagikan ke WhatsApp pelanggan.",
+    },
+    {
+      q: "Bisa dipakai di HP dan tablet?",
+      a: "Bisa. Satu aplikasi untuk HP dan tablet, dengan tampilan yang menyesuaikan layar.",
+    },
+    {
+      q: "Apakah bisa mencetak struk?",
+      a: "Bisa, lewat printer thermal Bluetooth. Struk juga bisa dikirim ke WhatsApp pelanggan.",
     },
   ],
 };
@@ -223,29 +276,31 @@ export const FINAL_CTA = {
 } as const;
 
 export const FOOTER = {
-  tagline: "Sistem operasional untuk bisnis laundry, dari terima sampai antar.",
+  tagline: "Sistem operasional laundry: kasir, produksi, kurir, owner, dan self-service.",
+  // The "Fitur" column is generated from content/features.ts in Footer.tsx.
   columns: [
     {
-      title: "Produk",
+      title: "Perusahaan",
       links: [
-        { label: "Cara kerja", href: "#cara-kerja" },
-        { label: "Harga", href: "#harga" },
-        { label: "FAQ", href: "#faq" },
-      ],
-    },
-    {
-      title: "Akun",
-      links: [
-        { label: "Masuk", href: LINKS.login },
-        { label: "Daftar", href: LINKS.signup },
+        { label: "Tentang", href: "/tentang" },
+        { label: "Kontak", href: "/kontak" },
+        { label: "Harga", href: "/harga" },
       ],
     },
     {
       title: "Bantuan",
       links: [
+        { label: "Bantuan", href: "/bantuan" },
+        { label: "FAQ", href: "/#faq" },
         { label: "help@nevira.id", href: LINKS.email },
-        { label: "Syarat & Ketentuan", href: LINKS.terms },
-        { label: "Kebijakan Privasi", href: LINKS.privacy },
+        { label: "WhatsApp", href: LINKS.whatsapp },
+      ],
+    },
+    {
+      title: "Legal",
+      links: [
+        { label: "Syarat & Ketentuan", href: "/legal/syarat-ketentuan" },
+        { label: "Kebijakan Privasi", href: "/legal/kebijakan-privasi" },
       ],
     },
   ],

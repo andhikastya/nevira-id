@@ -140,7 +140,7 @@ export function Trees() {
     <group>
       {FOLIAGE.map((mat, i) => (
         <Instanced key={i} items={data.foliage[i]} material={mat}>
-          <sphereGeometry args={[1, 14, 11]} />
+          <sphereGeometry args={[1, 10, 8]} />
         </Instanced>
       ))}
       <Instanced items={data.trunks} material={M.trunk}>

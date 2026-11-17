@@ -42,7 +42,7 @@ export function Hero() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/fallback/hero.webp"
-        alt="Ilustrasi kota laundry Nevira: toko, ruang cuci, kurir, dan rumah pelanggan terhubung ke satu sistem"
+        alt="Ilustrasi operasional laundry Nevira: toko, ruang cuci, kurir, dan rumah pelanggan terhubung ke satu sistem"
         width={1400}
         height={1250}
         className="no3d-only pointer-events-none absolute -z-[1] right-0 bottom-0 w-full max-w-[880px] [mask-composite:intersect] [mask-image:linear-gradient(90deg,transparent,#000_30%),linear-gradient(0deg,transparent,#000_18%)] max-md:relative max-md:-mt-6 max-md:[mask-image:linear-gradient(180deg,transparent,#000_20%,#000_80%,transparent)] md:top-1/2 md:w-[60%] md:-translate-y-1/2"

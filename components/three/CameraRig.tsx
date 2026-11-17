@@ -11,7 +11,9 @@ const smooth = (t: number) => t * t * (3 - 2 * t);
 const lerp3 = (out: Vector3, a: number[], b: number[], t: number) =>
   out.set(MathUtils.lerp(a[0], b[0], t), MathUtils.lerp(a[1], b[1], t), MathUtils.lerp(a[2], b[2], t));
 
-const PARAM_KEYS: (keyof SceneParams)[] = ["chaos", "color", "hub", "dusk", "sign"];
+const tmpDir = new Vector3();
+
+const PARAM_KEYS: (keyof SceneParams)[] = ["chaos", "color", "hub", "dusk", "sign", "morning"];
 
 /** Blends camera + scene params between scroll stations, then damps toward them. */
 export function CameraRig() {
@@ -33,7 +35,9 @@ export function CameraRig() {
     const t = smooth(p - i0);
     const a: Station = STATIONS[stations[i0]] ?? FALLBACK_STATION;
     const b: Station = STATIONS[stations[i1]] ?? a;
-    live.focus = stations[Math.round(p)] ?? "hero";
+    const near = stations[Math.round(p)] ?? "hero";
+    // A station may borrow another station's flourishes (e.g. a feature page reusing the owner tooltip).
+    live.focus = STATIONS[near]?.focus ?? near;
 
     const narrow = size.width < 768;
     // followVan: pos = [radial offset (negative = toward island center), height, tangential offset]
@@ -50,7 +54,7 @@ export function CameraRig() {
     lerp3(goalTarget.current, resolve(a, "target"), resolve(b, "target"), t);
     if (narrow) {
       // Portrait: pull back along the view direction so the subject fits.
-      const dir = goalPos.current.clone().sub(goalTarget.current);
+      const dir = tmpDir.copy(goalPos.current).sub(goalTarget.current);
       goalPos.current.copy(goalTarget.current).add(dir.multiplyScalar(1.45));
       // Copy stacks on top on phones: aim higher so the subject sits in the lower half.
       goalTarget.current.y += 2.2;

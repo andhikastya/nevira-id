@@ -6,7 +6,7 @@ import { Container, Section } from "./Section";
 
 export function Faq() {
   return (
-    <Section station="faq" id="faq" aria-labelledby="faq-title" className="bg-background py-24 md:py-32">
+    <Section station="faq" id="faq" data-opaque aria-labelledby="faq-title" className="bg-background py-24 md:py-32">
       <Container className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
         <div>
           <SectionHeading id="faq-title" eyebrow={FAQ.eyebrow} title={FAQ.title} body={FAQ.body} />
