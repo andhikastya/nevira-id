@@ -38,15 +38,15 @@ export function ContactForm() {
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <label className="block">
           <span className="text-label font-medium text-text-1">Nama</span>
-          <input name="nama" required autoComplete="name" placeholder="Nama lengkap" className={`${field} mt-2`} />
+          <input name="nama" required autoComplete="name" placeholder="Contoh: Budi Santoso" className={`${field} mt-2`} />
         </label>
         <label className="block">
           <span className="text-label font-medium text-text-1">Nama laundry</span>
-          <input name="laundry" required autoComplete="organization" placeholder="mis. Laundry Bersih" className={`${field} mt-2`} />
+          <input name="laundry" required autoComplete="organization" placeholder="Contoh: Laundry Bersih" className={`${field} mt-2`} />
         </label>
         <label className="block">
           <span className="text-label font-medium text-text-1">No. WhatsApp</span>
-          <input name="wa" required type="tel" inputMode="tel" autoComplete="tel" placeholder="08…" className={`${field} mt-2`} />
+          <input name="wa" required type="tel" inputMode="tel" autoComplete="tel" placeholder="Contoh: 087251122441" className={`${field} mt-2`} />
         </label>
         <label className="block">
           <span className="text-label font-medium text-text-1">Jumlah outlet</span>
@@ -81,14 +81,11 @@ export function ContactForm() {
       </fieldset>
       <label className="mt-5 block">
         <span className="text-label font-medium text-text-1">Pesan</span>
-        <textarea name="pesan" rows={4} placeholder="Ceritakan kebutuhan Anda" className={`${field} mt-2 h-auto py-3`} />
+        <textarea name="pesan" rows={4} placeholder="Contoh: Saya punya 2 outlet dan ingin mencoba fitur kasir dan antar-jemput." className={`${field} mt-2 h-auto py-3`} />
       </label>
       <Button type="submit" size="lg" trailingIcon="ri-arrow-right-line" className="mt-6">
         Kirim lewat email
       </Button>
-      <p className="mt-3 text-caption text-text-3">
-        Tombol ini membuka aplikasi email Anda dengan pesan yang sudah terisi. Data hanya dipakai untuk menghubungi Anda.
-      </p>
     </form>
   );
 }

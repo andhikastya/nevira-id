@@ -19,6 +19,7 @@ export const NAV: readonly { label: string; href: string; menu?: "fitur" }[] = [
   { label: "Fitur", href: "/fitur", menu: "fitur" },
   { label: "Harga", href: "/harga" },
   { label: "FAQ", href: "/bantuan" },
+  { label: "Kontak", href: "/kontak" },
 ];
 
 export const HERO = {
