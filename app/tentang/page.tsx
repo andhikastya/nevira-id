@@ -41,7 +41,7 @@ export default function TentangPage() {
           {/* "Perjalanan" (company timeline) is left out until the team supplies real milestones. */}
 
           <div>
-            <SectionHeading eyebrow="Nevira dalam angka" title="Dipakai laundry yang ingin tumbuh rapi." />
+            <SectionHeading eyebrow="Nevira dalam angka" title="Dipakai Laundry yang Ingin Tumbuh Rapi." />
             <dl className="mt-8 grid grid-cols-3 gap-3">
               {PROOF.stats.map((s) => (
                 <Card key={s.label} className="flex flex-col-reverse p-5">
@@ -65,7 +65,7 @@ export default function TentangPage() {
           </Card>
         </Container>
       </Section>
-      <FinalCta title="Siap merapikan operasional laundry Anda?" body="Ceritakan laundry Anda, tim kami siap membantu." primary="contact" />
+      <FinalCta title="Siap Merapikan Operasional Laundry Anda?" body="Ceritakan laundry Anda, tim kami siap membantu." primary="contact" />
     </main>
   );
 }

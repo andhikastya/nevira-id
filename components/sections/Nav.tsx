@@ -115,7 +115,7 @@ export function Nav() {
                     aria-expanded={menu}
                     aria-controls="fitur-menu"
                     onClick={() => setMenu((v) => !v)}
-                    className={itemClass(isActive(pathname, item.href))}
+                    className={`cursor-pointer ${itemClass(isActive(pathname, item.href))}`}
                   >
                     {item.label}
                     <i
@@ -143,7 +143,7 @@ export function Nav() {
                                     <i className={`${f.icon} text-[18px]`} aria-hidden />
                                   </span>
                                   <span>
-                                    <span className="block text-body-sm font-semibold text-text-1">{f.name}</span>
+                                    <span className="block text-body-sm font-semibold text-text-1">{f.navName ?? f.name}</span>
                                     <span className="block text-caption text-text-3">{f.summary}</span>
                                   </span>
                                 </Link>
@@ -224,7 +224,7 @@ export function Nav() {
                             className="flex h-10 items-center gap-2 rounded-[10px] px-3 text-body-sm text-text-2 transition-colors hover:bg-surface-1"
                           >
                             <i className={`${f.icon} text-[16px] text-accent`} aria-hidden />
-                            {f.name}
+                            {f.navName ?? f.name}
                           </Link>
                         </li>
                       ))}

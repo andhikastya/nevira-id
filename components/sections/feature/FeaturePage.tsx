@@ -55,6 +55,18 @@ export function FeaturePage({ feature: f }: { feature: Feature }) {
               {f.hero.title}
             </h1>
             <p className="mt-5 max-w-[500px] text-body-lg text-text-2 text-pretty">{f.hero.body}</p>
+            {f.hero.points && (
+              <ul className="mt-5 space-y-2.5">
+                {f.hero.points.map((p) => (
+                  <li key={p} className="flex items-start gap-2.5 text-body text-text-2">
+                    <span className="mt-[3px] flex size-5 shrink-0 items-center justify-center rounded-full bg-success-bg text-success">
+                      <i className="ri-check-line text-[13px] leading-none" aria-hidden />
+                    </span>
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            )}
             <div className="mt-8 flex flex-wrap gap-3">
               {contact ? (
                 <ButtonLink href="/kontak" size="lg" trailingIcon="ri-arrow-right-line">
@@ -69,13 +81,6 @@ export function FeaturePage({ feature: f }: { feature: Feature }) {
                 Lihat harga
               </ButtonLink>
             </div>
-            <ul className="mt-8 flex flex-wrap gap-2" aria-label="Tersedia di">
-              {f.devices.map((d) => (
-                <li key={d}>
-                  <Badge tone="neutral">{d}</Badge>
-                </li>
-              ))}
-            </ul>
             <ScreenFrame src={f.screen} label={f.name} icon={f.icon} className="no3d-only mt-8" />
           </div>
         </Container>
@@ -97,9 +102,11 @@ export function FeaturePage({ feature: f }: { feature: Feature }) {
                   <span className="flex size-8 items-center justify-center rounded-full bg-accent text-body-sm font-semibold text-white">
                     {i + 1}
                   </span>
-                  <Badge tone="neutral" icon={f.icon}>
-                    {f.name}
-                  </Badge>
+                  {!f.hideStationBadge && (
+                    <Badge tone="neutral" icon={f.icon}>
+                      {f.name}
+                    </Badge>
+                  )}
                 </div>
                 <h2 id={`station-${i}`} className="mt-5 text-subheading text-balance">
                   {s.title}
@@ -132,7 +139,7 @@ export function FeaturePage({ feature: f }: { feature: Feature }) {
       <Section station="overview" aria-labelledby="caps-title" className="py-24 md:py-32">
         <Container>
           <Panel className="max-w-[680px] p-6 md:p-8">
-            <SectionHeading id="caps-title" eyebrow="Semua kemampuan" title={`Yang juga ada di ${f.name}`} />
+            <SectionHeading id="caps-title" eyebrow={f.caps?.eyebrow ?? "Semua kemampuan"} title={f.caps?.title ?? `Yang Juga Ada di ${f.name}`} />
           </Panel>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {f.capabilities.map((c) => (
@@ -145,7 +152,7 @@ export function FeaturePage({ feature: f }: { feature: Feature }) {
             ))}
           </ul>
 
-          <h2 className="mt-20 text-subheading">Fitur terkait</h2>
+          <h2 className="mt-20 text-subheading">Fitur Terkait</h2>
           <ul className="mt-6 grid gap-3 md:grid-cols-3">
             {f.related.map((slug) => {
               const r = featureBySlug(slug);

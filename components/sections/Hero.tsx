@@ -12,12 +12,17 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.7)_35%,rgba(255,255,255,0)_62%)] max-md:bg-[linear-gradient(180deg,rgba(255,255,255,0.9)_0%,rgba(255,255,255,0.6)_70%,rgba(255,255,255,0)_100%)]"
       />
       <Container className="relative py-16">
-        <div className="max-w-[560px]">
+        <div className="max-w-[640px]">
           <Badge tone="primary" icon="ri-sparkling-2-line">
             {HERO.eyebrow}
           </Badge>
-          <h1 id="hero-title" className="mt-5 text-[36px] leading-[1.05] tracking-[-0.025em] text-balance md:text-[48px] lg:text-[56px]">
-            {HERO.title}
+          <h1 id="hero-title" className="mt-5 text-[36px] leading-[1.05] tracking-[-0.025em] text-balance md:text-[44px] lg:text-[52px]">
+            {HERO.titleLines.map((line, i) => (
+              <span key={line} className="md:block">
+                {line}
+                {i < HERO.titleLines.length - 1 && " "}
+              </span>
+            ))}
           </h1>
           <p className="mt-5 max-w-[500px] text-body-lg text-text-2 text-pretty">{HERO.body}</p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -28,14 +33,6 @@ export function Hero() {
               {HERO.secondary}
             </ButtonLink>
           </div>
-          <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-2">
-            {HERO.trust.map((t) => (
-              <li key={t} className="flex items-center gap-1.5 text-body-sm text-text-3">
-                <i className="ri-check-line text-[16px] text-success" aria-hidden />
-                {t}
-              </li>
-            ))}
-          </ul>
         </div>
       </Container>
       {/* Static render of the town for no-WebGL / reduced-motion visitors. */}
@@ -49,11 +46,11 @@ export function Hero() {
       />
       <a
         href="#masalah"
-        aria-label="Gulir ke bawah"
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1 text-caption text-text-3 md:flex"
+        aria-label="Scroll ke bawah"
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1 text-caption text-text-3 transition-colors hover:text-accent motion-safe:animate-bounce md:flex"
       >
-        Gulir
-        <i className="ri-arrow-down-line animate-bounce text-[16px]" aria-hidden />
+        <i className="ri-mouse-line text-[22px]" aria-hidden />
+        Scroll
       </a>
     </Section>
   );

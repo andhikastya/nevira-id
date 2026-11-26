@@ -7,6 +7,7 @@ import "./globals.css";
 import { Footer } from "@/components/sections/Footer";
 import { Nav } from "@/components/sections/Nav";
 import { ScrollDriver } from "@/components/ScrollDriver";
+import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { SceneRoot } from "@/components/three/SceneRoot";
 
 export const metadata: Metadata = {
@@ -67,6 +68,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Nav />
         {children}
         <Footer />
+        <WhatsAppFab />
       </body>
     </html>
   );

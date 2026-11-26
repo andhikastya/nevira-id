@@ -11,28 +11,28 @@ const faq = (q: string) => {
 };
 
 export const HARGA = {
-  title: "Bayar sesuai pemakaian.",
+  title: "Bayar Sesuai Pemakaian.",
   body: "Isi Saldo Koin lewat transfer bank atau e-wallet. Koin terpotong hanya saat fitur dipakai.",
   steps: {
     eyebrow: "Cara kerja",
-    title: "Tiga langkah Saldo Koin",
+    title: "Tiga Langkah Saldo Koin",
     items: [
-      { icon: "ri-wallet-3-line", title: "Isi saldo", body: "Transfer bank atau e-wallet. Owner juga bisa top-up dari aplikasi." },
-      { icon: "ri-receipt-line", title: "Pakai fitur", body: "Catat transaksi, cetak nota, kirim struk, ekspor laporan." },
-      { icon: "ri-coins-line", title: "Koin terpotong", body: "Hanya saat fitur dipakai; riwayat terlihat di back office." },
+      { icon: "ri-wallet-3-line", title: "Isi Saldo", body: "Transfer bank atau e-wallet. Owner juga bisa top-up dari aplikasi." },
+      { icon: "ri-receipt-line", title: "Pakai Fitur", body: "Catat transaksi, cetak nota, kirim struk, ekspor laporan." },
+      { icon: "ri-coins-line", title: "Koin Terpotong", body: "Hanya saat fitur dipakai; riwayat terlihat di back office." },
     ],
   },
-  ratesTitle: "Tarif per pemakaian",
+  ratesTitle: "Tarif per Pemakaian",
   topup: {
-    title: "Cara isi ulang & tagihan",
+    title: "Cara Isi Ulang & Tagihan",
     items: [
-      { icon: "ri-bank-line", title: "Transfer bank", body: "Saldo masuk setelah pembayaran terkonfirmasi." },
-      { icon: "ri-wallet-line", title: "E-wallet", body: "Isi ulang dari dompet digital." },
-      { icon: "ri-smartphone-line", title: "Dari aplikasi owner", body: "Top-up langsung dari HP pemilik." },
-      { icon: "ri-shirt-line", title: "Langganan self-service", body: "Tagihan mesin dilihat dan dibayar dari aplikasi owner." },
+      { icon: "ri-bank-line", title: "Transfer Bank", body: "Saldo masuk setelah pembayaran terkonfirmasi." },
+      { icon: "ri-wallet-line", title: "E-Wallet", body: "Isi ulang dari dompet digital." },
+      { icon: "ri-smartphone-line", title: "Dari Aplikasi Owner", body: "Top-up langsung dari HP pemilik." },
+      { icon: "ri-shirt-line", title: "Langganan Self-Service", body: "Tagihan mesin dilihat dan dibayar dari aplikasi owner." },
     ],
   },
-  faqTitle: "Soal biaya & saldo.",
+  faqTitle: "Soal Biaya & Saldo.",
   faq: [
     faq("Bagaimana sistem Saldo Koin bekerja?"),
     faq("Bagaimana cara mengisi ulang Saldo Koin?"),
@@ -46,25 +46,25 @@ export const HARGA = {
       a: "Tidak. Sesuai Syarat & Ketentuan, Saldo Koin tidak dapat diuangkan kembali dan hanya dapat digunakan di dalam aplikasi Nevira.",
     },
   ],
-  cta: "Coba dulu, bayar sesuai pemakaian.",
+  cta: "Coba Dulu, Bayar Sesuai Pemakaian.",
   rates: PRICING.rates,
 } as const;
 
 /** Self-service machine subscription (per month). Prices supplied by the team. */
 export const SELF_SERVICE_PRICING = {
-  eyebrow: "Harga self service",
-  title: "Bayar per mesin yang Anda pasang.",
+  eyebrow: "Jadi lebih hemat",
+  title: "Bayar per Mesin Menyesuaikan Kebutuhan",
   body: "Ditagih per bulan. Tagihannya bisa dilihat dari aplikasi owner.",
   period: "bulan",
   items: [
     { key: "stack", icon: "ri-stack-line", label: "Per stack", price: 100000, note: "1 stack = mesin cuci dan pengering yang ditumpuk." },
     { key: "mesin", icon: "ri-shirt-line", label: "Per mesin", price: 50000, note: "Satu mesin tambahan." },
   ],
-  calculator: { title: "Hitung tagihan bulanan", stackLabel: "Jumlah stack", machineLabel: "Jumlah mesin tambahan", totalLabel: "Estimasi tagihan per bulan" },
+  calculator: { title: "Hitung Tagihan Bulanan", stackLabel: "Jumlah stack", machineLabel: "Jumlah mesin tambahan", totalLabel: "Estimasi tagihan per bulan" },
 } as const;
 
 export const BANTUAN: { title: string; body: string; groups: FaqGroup[] } = {
-  title: "Ada yang bisa kami bantu?",
+  title: "Ada yang Bisa Kami Bantu?",
   body: "Jawaban seputar Nevira, Saldo Koin, perangkat, dan akun. Belum ketemu? Hubungi tim kami.",
   groups: [
     {
@@ -80,17 +80,17 @@ export const BANTUAN: { title: string; body: string; groups: FaqGroup[] } = {
       ],
     },
     {
-      title: "Saldo Koin & harga",
+      title: "Saldo Koin & Harga",
       icon: "ri-coins-line",
       items: [faq("Bagaimana sistem Saldo Koin bekerja?"), faq("Bagaimana cara mengisi ulang Saldo Koin?")],
     },
     {
-      title: "Kasir & perangkat",
+      title: "Kasir & Perangkat",
       icon: "ri-tablet-line",
       items: [faq("Bisa dipakai di HP dan tablet?"), faq("Apakah bisa mencetak struk?"), faq("Bagaimana saya memantau status cucian?")],
     },
     {
-      title: "Akun & keamanan",
+      title: "Akun & Keamanan",
       icon: "ri-shield-user-line",
       items: [
         {
@@ -107,23 +107,23 @@ export const BANTUAN: { title: string; body: string; groups: FaqGroup[] } = {
 };
 
 export const TENTANG = {
-  title: "Kami membangun sistem operasional untuk laundry Indonesia.",
+  title: "Kami Membangun Sistem Operasional untuk Laundry Indonesia.",
   body: "Nevira lahir dari masalah yang sama di banyak laundry: nota hilang, kurir tanpa jadwal, dan laba yang cuma ditebak.",
   mission: {
-    title: "Membuat bisnis laundry rapi dan bisa tumbuh.",
+    title: "Membuat Bisnis Laundry Rapi dan Bisa Tumbuh.",
     body: "Satu sistem yang dipakai dari kasir sampai pemilik, supaya setiap order tercatat sekali dan mengalir sendiri.",
   },
   values: [
-    { icon: "ri-shield-check-line", title: "Jujur soal fitur", body: "Hanya menjanjikan fitur yang benar-benar ada." },
-    { icon: "ri-git-merge-line", title: "Satu data", body: "Dicatat sekali, terbaca dari kasir sampai pemilik." },
-    { icon: "ri-file-excel-2-line", title: "Data milik Anda", body: "Laporan bisa diekspor ke Excel kapan saja." },
+    { icon: "ri-shield-check-line", title: "Jujur Soal Fitur", body: "Hanya menjanjikan fitur yang benar-benar ada." },
+    { icon: "ri-git-merge-line", title: "Satu Data", body: "Dicatat sekali, terbaca dari kasir sampai pemilik." },
+    { icon: "ri-file-excel-2-line", title: "Data Milik Anda", body: "Laporan bisa diekspor ke Excel kapan saja." },
   ],
   office: { city: "Malang, Indonesia", email: "help@nevira.id" },
 };
 
 export const KONTAK = {
-  title: "Bicara dengan tim Nevira.",
-  body: "Tanya fitur, minta demo, atau konsultasi pindah dari sistem lama.",
+  title: "Start with Nevira!",
+  body: "Tanya fitur, minta demo, konsultasi migrasi data dari aplikasi lama, semuanya gratis!",
   interests: ["Kasir", "Produksi", "Antar-jemput", "Aplikasi owner", "Back office", "Self-service", "Absensi"],
   outlets: ["1 outlet", "2–5 outlet", "Lebih dari 5"],
 };

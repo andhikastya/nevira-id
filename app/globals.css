@@ -231,3 +231,18 @@ html[data-scene="on"] .on-dusk [data-variant="primary"] {
 html[data-scene="on"] .on-dusk [data-variant="primary"]:hover {
   background: #7550be;
 }
+
+/* Tailwind v4 resets buttons to cursor: default; restore the hand cursor for clickable controls. */
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+summary,
+select {
+  cursor: pointer;
+}
+
+/* Client logo marquee: each list is rendered twice, so -50% lands on an identical frame. */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}

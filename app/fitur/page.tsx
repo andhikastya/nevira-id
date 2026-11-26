@@ -52,7 +52,7 @@ export default function FiturPage() {
 
       <Section station="overview" data-opaque aria-labelledby="peran-title" className="bg-background py-24 md:py-28">
         <Container>
-          <SectionHeading id="peran-title" title="Jelajahi per peran" body="Pilih peran di laundry Anda untuk melihat fitur yang relevan." />
+          <SectionHeading id="peran-title" title="Jelajahi per Peran" body="Pilih peran di laundry Anda untuk melihat fitur yang relevan." />
           <div className="mt-8">
             <FiturExplorer />
           </div>
@@ -65,7 +65,7 @@ export default function FiturPage() {
             <SectionHeading
               id="data-title"
               eyebrow="Satu data"
-              title="Semua fitur membaca data yang sama."
+              title="Semua Fitur Membaca Data yang Sama."
               body="Tidak ada input ganda antara kasir, produksi, kurir, dan laporan."
               align="center"
             />
@@ -79,7 +79,7 @@ export default function FiturPage() {
             <SectionHeading
               id="device-title"
               eyebrow="HP & tablet"
-              title="Satu aplikasi, menyesuaikan perangkat."
+              title="Satu Aplikasi, Menyesuaikan Perangkat."
               body="Layout portrait di HP, landscape di tablet kasir. Printer thermal Bluetooth."
             />
           </div>
@@ -90,7 +90,7 @@ export default function FiturPage() {
         </Container>
       </Section>
 
-      <FinalCta title="Mulai dari fitur yang Anda butuhkan." body="Daftar gratis, atau ceritakan kebutuhan Anda ke tim kami." secondary="contact" />
+      <FinalCta title="Mulai dari Fitur yang Anda Butuhkan." body="Daftar gratis, atau ceritakan kebutuhan Anda ke tim kami." secondary="contact" />
     </main>
   );
 }

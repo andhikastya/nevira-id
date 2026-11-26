@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FOOTER } from "@/content/copy";
+import { FOOTER, LINKS } from "@/content/copy";
 import { FEATURES, featureHref } from "@/content/features";
 import { Logo } from "../Logo";
 import { Container } from "./Section";
@@ -32,6 +32,24 @@ export function Footer() {
         <div className="sm:col-span-2 lg:col-span-1">
           <Logo />
           <p className="mt-4 max-w-[280px] text-body-sm text-text-3">{FOOTER.tagline}</p>
+          <ul className="mt-5 flex gap-2" aria-label="Media sosial">
+            {[
+              { label: "Instagram", href: LINKS.instagram, icon: "ri-instagram-line" },
+              { label: "TikTok", href: LINKS.tiktok, icon: "ri-tiktok-line" },
+            ].map((s) => (
+              <li key={s.label}>
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Nevira di ${s.label}`}
+                  className="flex size-10 items-center justify-center rounded-full border border-border text-text-2 transition-colors hover:border-accent hover:bg-accent-subtle hover:text-accent"
+                >
+                  <i className={`${s.icon} text-[20px]`} aria-hidden />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
         {columns.map((col) => (
           <nav key={col.title} aria-label={col.title}>

@@ -29,7 +29,7 @@ export function Journey() {
     <div id="cara-kerja" className="relative">
       <Section station="journey-intro" aria-labelledby="journey-title" className="flex min-h-[70svh] items-end pb-16">
         <Container>
-          <Panel className="max-w-[480px] p-6 md:p-8">
+          <Panel className="max-w-[560px] p-6 md:p-8">
             <SectionHeading id="journey-title" eyebrow={JOURNEY.eyebrow} title={JOURNEY.title} body={JOURNEY.body} />
           </Panel>
         </Container>
@@ -89,11 +89,13 @@ export function Journey() {
               <h3 id={`step-${s.key}`} className="mt-5 text-subheading text-balance">
                 {s.title}
               </h3>
-              <p className="mt-3 text-body text-text-2">{s.body}</p>
-              <ul className="mt-5 flex flex-wrap gap-2">
+              {s.body && <p className="mt-3 text-body text-text-2">{s.body}</p>}
+              <ul className="mt-5 space-y-2.5">
                 {s.points.map((p) => (
-                  <li key={p} className="flex items-center gap-1.5 rounded-full bg-surface-1 px-3 py-1 text-body-sm text-text-2">
-                    <i className="ri-check-line text-[14px] text-success" aria-hidden />
+                  <li key={p} className="flex items-start gap-2.5 text-body text-text-2">
+                    <span className="mt-[3px] flex size-5 shrink-0 items-center justify-center rounded-full bg-success-bg text-success">
+                      <i className="ri-check-line text-[13px] leading-none" aria-hidden />
+                    </span>
                     {p}
                   </li>
                 ))}

@@ -34,7 +34,7 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="rounded-[16px] border border-border bg-background p-6 shadow-1 md:p-8">
-      <h2 className="text-subheading">Minta demo</h2>
+      <h2 className="text-subheading">Lengkapi Data Diri, dan Segera Kami Hubungi</h2>
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <label className="block">
           <span className="text-label font-medium text-text-1">Nama</span>

@@ -23,7 +23,7 @@ export default function BantuanPage() {
           <HelpCenter groups={BANTUAN.groups} />
         </Container>
         <Container className="mt-20">
-          <h2 className="text-subheading">Belum ketemu jawabannya?</h2>
+          <h2 className="text-subheading">Belum Ketemu Jawabannya?</h2>
           <ul className="mt-6 grid gap-3 md:grid-cols-3">
             {[
               { icon: "ri-whatsapp-line", title: "Chat WhatsApp", body: "Tanya langsung ke tim kami.", href: LINKS.whatsapp, cta: "Buka WhatsApp" },

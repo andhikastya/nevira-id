@@ -18,7 +18,7 @@ export function FinalCta({ title = FINAL_CTA.title, body = FINAL_CTA.body, prima
         <h2 id="cta-title" className="mx-auto max-w-[680px] text-[36px] leading-[1.05] tracking-[-0.025em] text-balance md:text-[56px]">
           {title}
         </h2>
-        <p className="dusk-sub mx-auto mt-5 max-w-[520px] text-body-lg text-text-2">{body}</p>
+        <p className="dusk-sub mx-auto mt-5 max-w-[520px] text-body-lg whitespace-pre-line text-text-2">{body}</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           {primary === "contact" ? (
             <ButtonLink href="/kontak" size="lg" trailingIcon="ri-arrow-right-line">
