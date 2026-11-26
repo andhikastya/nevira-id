@@ -40,7 +40,7 @@ export const NEEDS = {
     { icon: "ri-store-2-line", tone: "violet", label: "Mau Buka Laundry", body: "Mulai dengan kasir, nota, dan laporan yang rapi sejak hari pertama.", href: "/kontak" },
     { icon: "ri-building-2-line", tone: "gold", label: "Mau Tambah Outlet", body: "Pantau setiap cabang dan pindahkan order antar outlet dari satu aplikasi.", href: "/fitur/aplikasi-owner" },
     { icon: "ri-arrow-left-right-line", tone: "blue", label: "Mau Pindah POS", body: "Beralih ke kasir yang mencatat order, pembayaran, dan status cucian sekaligus.", href: "/fitur/kasir-pos" },
-    { icon: "ri-t-shirt-air-line", tone: "pink", label: "Mau Laundry Self Service", body: "Kelola mesin cuci dan pengering swalayan tanpa harus dijaga terus.", href: "/fitur/self-service" },
+    { icon: "ri-t-shirt-air-line", tone: "pink", label: "Mau Laundry Self Service", body: "Laundry makin hemat tanpa biaya extender device.", href: "/fitur/self-service" },
     { icon: "ri-stack-line", tone: "green", label: "Mau Laundry Full Service", body: "Lacak setiap order dari cuci, setrika, sampai siap diantar.", href: "/fitur/produksi" },
     { icon: "ri-smartphone-line", tone: "indigo", label: "Mau Digitalisasi", body: "Tinggalkan nota kertas dan rekap manual, semua tercatat otomatis.", href: "/fitur" },
   ],
@@ -198,7 +198,7 @@ export const USP = {
   highlight: "Nevira.",
   body: "7 keunggulan Nevira yang menjawab kendala di atas.",
   items: [
-    { title: "Customer Service Manusia Asli", body: "Bukan bot atau AI. Tim kami memberi jawaban dan solusi nyata sesuai kebutuhan Anda." },
+    { title: "Customer Service Fast Respon", body: "Bukan bot atau AI. Tim kami memberi jawaban dan solusi nyata sesuai kebutuhan Anda." },
     { title: "Semua Peran dalam 1 Aplikasi", body: "Kasir, produksi, kurir, dan owner cukup pakai satu aplikasi." },
     { title: "Status Produksi Real Time", body: "Setiap proses cucian terlihat secara real time." },
     { title: "Feedback Benar\u2011Benar Didengar", body: "Feedback kami tampung untuk perbaikan dan kenyamanan user." },

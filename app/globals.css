@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "remixicon/fonts/remixicon.css";
+@import "./remixicon-subset.css";
 
 /* Kilau tokens — light mode (primary). Source: kilau-design/references/platform-mapping.md */
 :root {
@@ -11,14 +11,14 @@
   --border-visible: #cdcfd6;
   --text1: #32363e;
   --text2: #4c515d;
-  --text3: #818898;
+  --text3: #626977; /* AA (≥4.5:1) on white and --surface1 */
   --text4: #b3b7c1;
   --accent: #5b369e;
   --accent-hover: #492b80;
   --accent-dark: #2b194d;
   --accent-subtle: #ebe5f6;
   --reward: #e8b723;
-  --reward-deep: #8f6f0e;
+  --reward-deep: #7d600b;
   /* Gold for large reward numbers on --reward-bg: passes WCAG AA large-text (3.66:1). */
   --reward-strong: #a47a06;
   --reward-bg: #fdf7e7;
@@ -225,11 +225,11 @@ html[data-scene="on"] .on-dusk .dusk-sub {
 }
 html[data-scene="on"] .on-dusk [data-variant="primary"] {
   /* Kilau dark-mode accent so the action stays visible on the purple evening sky. */
-  background: #916ed4;
+  background: #8259c8;
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25), var(--elev-2);
 }
 html[data-scene="on"] .on-dusk [data-variant="primary"]:hover {
-  background: #7550be;
+  background: #6f4cb5;
 }
 
 /* Tailwind v4 resets buttons to cursor: default; restore the hand cursor for clickable controls. */

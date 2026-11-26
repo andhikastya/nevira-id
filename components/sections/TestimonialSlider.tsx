@@ -94,7 +94,7 @@ export function TestimonialSlider() {
       </ul>
 
       <div className="mt-5 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           {items.map((t, i) => (
             <button
               key={t.name}
@@ -102,8 +102,14 @@ export function TestimonialSlider() {
               aria-label={`Tampilkan testimoni ${t.name}`}
               aria-current={i === active}
               onClick={() => goTo(i)}
-              className={`h-2 rounded-full transition-all duration-300 ${i === active ? "w-6 bg-white" : "w-2 bg-white/40 hover:bg-white/70"}`}
-            />
+              className="group/dot flex h-6 min-w-6 items-center justify-center"
+            >
+              {/* 24px hit area around the small visible dot (WCAG target size). */}
+              <span
+                aria-hidden
+                className={`block h-2 rounded-full transition-all duration-300 ${i === active ? "w-6 bg-white" : "w-2 bg-white/40 group-hover/dot:bg-white/70"}`}
+              />
+            </button>
           ))}
         </div>
         <div className="flex gap-2">

@@ -17,18 +17,33 @@ function canRender3D() {
   }
 }
 
-/** Mounts the fixed 3D canvas after first paint, only when WebGL + motion are OK. */
+/** First-interaction events that wake the 3D scene. */
+const WAKE_EVENTS = ["pointerdown", "pointermove", "touchstart", "wheel", "scroll", "keydown"] as const;
+
+/**
+ * Mounts the fixed 3D canvas on the visitor's first interaction, only when WebGL + motion are OK.
+ * Until then the static fallback art (.no3d-only) is shown, so three.js (~280 KB, seconds of
+ * main-thread work on mid-range phones) never competes with the first paint of the copy.
+ */
 export function SceneRoot() {
   const [on, setOn] = useState(false);
 
   useEffect(() => {
     if (!canRender3D()) return;
-    const id = requestAnimationFrame(() => {
-      setOn(true);
-      document.documentElement.dataset.scene = "on";
-      useScene.getState().setSceneOn(true);
-    });
-    return () => cancelAnimationFrame(id);
+    let raf = 0;
+    const wake = () => {
+      WAKE_EVENTS.forEach((e) => window.removeEventListener(e, wake));
+      raf = requestAnimationFrame(() => {
+        setOn(true);
+        document.documentElement.dataset.scene = "on";
+        useScene.getState().setSceneOn(true);
+      });
+    };
+    WAKE_EVENTS.forEach((e) => window.addEventListener(e, wake, { passive: true }));
+    return () => {
+      WAKE_EVENTS.forEach((e) => window.removeEventListener(e, wake));
+      cancelAnimationFrame(raf);
+    };
   }, []);
 
   if (!on) return null;

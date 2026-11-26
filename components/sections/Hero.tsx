@@ -39,6 +39,9 @@ export function Hero() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/fallback/hero.webp"
+        srcSet="/fallback/hero-640.webp 640w, /fallback/hero-960.webp 960w, /fallback/hero.webp 1400w"
+        sizes="(min-width: 768px) min(60vw, 880px), 100vw"
+        fetchPriority="high"
         alt="Ilustrasi operasional laundry Nevira: toko, ruang cuci, kurir, dan rumah pelanggan terhubung ke satu sistem"
         width={1400}
         height={1250}

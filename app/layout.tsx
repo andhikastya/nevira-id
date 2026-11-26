@@ -63,7 +63,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
         <SceneRoot />
         {/* Clickable 3D labels (e.g. the /fitur map pins) render here, above the page content. */}
-        <div id="scene-overlay" aria-label="Peta fitur" className="pointer-events-none fixed inset-0 z-30 overflow-hidden" />
+        <div id="scene-overlay" role="group" aria-label="Peta fitur" className="pointer-events-none fixed inset-0 z-30 overflow-hidden" />
         <ScrollDriver />
         <Nav />
         {children}
