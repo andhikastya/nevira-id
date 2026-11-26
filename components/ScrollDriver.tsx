@@ -18,13 +18,16 @@ const HOLD_TO = 0.7;
  * Any [data-opaque] element that fully covers the viewport pauses 3D rendering.
  *
  * Mounted once in the root layout, so it survives client navigation; it re-measures
- * whenever the route changes.
+ * whenever the route changes. Starts only once the 3D scene is on (first interaction, see
+ * SceneRoot), so the section measuring + Lenis setup stay out of the initial page load.
  */
 export function ScrollDriver() {
   const pathname = usePathname();
   const api = useRef<{ measure: () => void; lenis: Lenis | null } | null>(null);
+  const sceneOn = useScene((s) => s.sceneOn);
 
   useEffect(() => {
+    if (!sceneOn) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const lenis = reduce ? null : new Lenis({ autoRaf: true, anchors: { offset: 0 }, lerp: 0.09 });
 
@@ -90,7 +93,7 @@ export function ScrollDriver() {
       window.removeEventListener("scroll", update);
       lenis?.destroy();
     };
-  }, []);
+  }, [sceneOn]);
 
   // New route: Lenis must forget the old page's scroll position, then stations are re-read.
   useEffect(() => {
