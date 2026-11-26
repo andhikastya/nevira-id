@@ -11,9 +11,9 @@ import { Toggle } from "../ui/Toggle";
 import { Container, Section } from "./Section";
 
 const [CORE, PRINT, WA, EXPORT] = PRICING.rates.map((r) => r.price);
-const TX_MIN = 100;
-const TX_MAX = 6000;
-const COST_MAX = TX_MAX * (CORE + PRINT + 2 * WA) + 30 * EXPORT;
+const TX_MIN = 0;
+const TX_MAX = 10000;
+const COST_MAX = TX_MAX * (CORE + PRINT + WA) + 30 * EXPORT;
 
 const rupiah = (n: number) => `Rp${Math.round(n).toLocaleString("id-ID")}`;
 
@@ -22,11 +22,11 @@ export function Pricing() {
   const [tx, setTx] = useState(900);
   const [print, setPrint] = useState(true);
   const [wa, setWa] = useState(true);
-  const [exports, setExports] = useState(4);
+  const [exports, setExports] = useState(1);
   const setCoinLevel = useScene((s) => s.setCoinLevel);
 
   const total = useMemo(
-    () => tx * CORE + (print ? tx * PRINT : 0) + (wa ? tx * 2 * WA : 0) + exports * EXPORT,
+    () => tx * CORE + (print ? tx * PRINT : 0) + (wa ? tx * WA : 0) + exports * EXPORT,
     [tx, print, wa, exports],
   );
 
@@ -98,7 +98,7 @@ export function Pricing() {
                 {rupiah(total)}
               </p>
               <p className="mt-1 text-body-sm text-text-2">
-                ≈ {rupiah(total / tx)} {c.perTxLabel}
+                ≈ {rupiah(tx > 0 ? total / tx : 0)} {c.perTxLabel}
               </p>
             </div>
             <p className="mt-3 text-caption text-text-3">{c.note}</p>

@@ -224,7 +224,7 @@ export const PRICING = {
     title: "Hitung Estimasi Biaya Bulanan",
     txLabel: "Transaksi per bulan",
     printLabel: "Cetak nota setiap transaksi",
-    waLabel: "Kirim 2 pesan WhatsApp per transaksi",
+    waLabel: "Kirim pesan WhatsApp per transaksi",
     exportLabel: "Ekspor laporan Excel per bulan",
     resultLabel: "Estimasi Saldo Koin per bulan",
     perTxLabel: "per transaksi",
